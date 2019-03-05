@@ -19,7 +19,7 @@ private:
 	void render();
 	GLFWwindow* window;
 	std::map<std::string, Shader> shaderMap;
-	unsigned int VBO;
-	unsigned int VAO;
+	std::map<std::string,unsigned int> VBOMap;
+	std::map<std::string,unsigned int> VAOMap;
 };
 

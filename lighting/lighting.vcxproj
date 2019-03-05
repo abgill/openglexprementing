@@ -28,6 +28,10 @@
     <ClInclude Include="OpenglApp.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="basicfrag.fs" />
+    <None Include="basicvertex.vs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{E113F421-70C0-4039-BB67-EEB4EAD3A697}</ProjectGuid>

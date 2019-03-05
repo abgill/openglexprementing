@@ -5,6 +5,10 @@
 #include<string>
 #include<map>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "Shader.h"
 
 
@@ -101,8 +105,7 @@ unsigned int OpenglApp::startRenderLoop()
 
 void OpenglApp::initialize_window()
 {
-	const unsigned int SCR_WIDTH = 800;
-	const unsigned int SCR_HEIGHT = 600;
+	
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -149,6 +152,19 @@ void OpenglApp::render()
 
 	glBindVertexArray(VAOMap["cube"]);
 	shaderMap.at("basic_shader").use();
+
+	glm::mat4 projection = glm::mat4(1.0f);
+	projection = glm::perspective(glm::radians(45.0f),(float) this->SCR_WIDTH /(float) this->SCR_HEIGHT, 0.1f, 100.0f);
+	shaderMap.at("basic_shader").setMat4("projection", projection);
+
+	glm::mat4 view = glm::mat4(1.0f);
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.5f));
+	shaderMap.at("basic_shader").setMat4("view", view);
+
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::rotate(model,(float) glm::radians(42.0), glm::vec3(1.0f, 0.3f, 0.5f));
+	shaderMap.at("basic_shader").setMat4("model", model);
+
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 		
 	// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)

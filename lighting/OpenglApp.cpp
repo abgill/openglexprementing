@@ -28,6 +28,8 @@ OpenglApp::OpenglApp()
 	//TODO: Figure out why operator [] isn't working
 	shaderMap.at("basic_shader").use();
 
+	this->camera = Camera();
+
 	float vertices[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
@@ -157,12 +159,13 @@ void OpenglApp::render()
 	projection = glm::perspective(glm::radians(45.0f),(float) this->SCR_WIDTH /(float) this->SCR_HEIGHT, 0.1f, 100.0f);
 	shaderMap.at("basic_shader").setMat4("projection", projection);
 
-	glm::mat4 view = glm::mat4(1.0f);
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.5f));
+	//glm::mat4 view = glm::mat4(1.0f);
+	//view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.5f));
+	glm::mat4 view = camera.getViewMatrix();
 	shaderMap.at("basic_shader").setMat4("view", view);
 
 	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::rotate(model,(float) glm::radians(42.0), glm::vec3(1.0f, 0.3f, 0.5f));
+	//model = glm::rotate(model,(float) glm::radians(90.0), glm::vec3(0.0f, .0f, 0.0f));
 	shaderMap.at("basic_shader").setMat4("model", model);
 
 	glDrawArrays(GL_TRIANGLES, 0, 36);

@@ -5,6 +5,7 @@
 #include<map>
 #include<string>
 #include"Shader.h"
+#include"Camera.h"
 
 class OpenglApp
 {
@@ -23,5 +24,6 @@ private:
 	std::map<std::string,unsigned int> VAOMap;
 	const unsigned int SCR_WIDTH = 800;
 	const unsigned int SCR_HEIGHT = 600;
+	Camera camera;
 };
 

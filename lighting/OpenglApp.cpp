@@ -12,6 +12,8 @@
 #include "Shader.h"
 
 
+
+
 OpenglApp::OpenglApp()
 {
 	this->window = NULL;
@@ -127,6 +129,15 @@ void OpenglApp::initialize_window()
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
 	}
+
+
+	/* ... Initialize everything here ... */
+
+	glfwSetWindowUserPointer(window, this);
+
+	
+
+	glfwSetMouseButtonCallback(window, (GLFWmousebuttonfun)mouse_callback);
 }
 
 void OpenglApp::framebuffer_size_callback(GLFWwindow * window, int width, int height)
@@ -187,5 +198,11 @@ void OpenglApp::render()
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }
+
+
+
+
+
+
 
 

@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
+#include<iostream>
 
 Camera::Camera()
 {
@@ -12,7 +12,7 @@ Camera::Camera()
 
 	this->worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	
-	this->pitch = 0.0f;
+	this->pitch = 10.0f;
 	this->yaw = -90.0f;
 	this->roll = 0;
 
@@ -54,6 +54,30 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime) {
 		cameraPosition -= rightVector * velocity;
 	if (direction == RIGHT)
 		cameraPosition += rightVector * velocity;
+
+	eulerToVectors();
+}
+
+void Camera::processMouseMovement(float xPos, float yPos)
+{
+	
+
+	//TODO mod to avoid overflow errors
+
+	this->yaw += (xPos - this->lastX) * sensivity; 
+	yaw = glm::mod(yaw, 360.0f);
+	this->pitch += (yPos - this->lastY) * sensivity;
+	
+	if (this->pitch > 85.5f) {
+		this->pitch = 85.5f;
+	}
+	if (this->pitch < -85.5f) {
+		this->pitch = -85.5f;
+	}
+	std::cout << "pitch: " << pitch << "yaw: " << yaw << std::endl;
+
+	this->lastX = xPos;
+	this->lastY = yPos;
 
 	eulerToVectors();
 }

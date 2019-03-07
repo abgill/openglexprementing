@@ -137,7 +137,9 @@ void OpenglApp::initialize_window()
 
 	
 
-	glfwSetMouseButtonCallback(window, (GLFWmousebuttonfun)mouse_callback);
+	glfwSetCursorPosCallback(window, mouse_callback);
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 void OpenglApp::framebuffer_size_callback(GLFWwindow * window, int width, int height)

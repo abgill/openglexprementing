@@ -17,7 +17,7 @@ public:
 	};
 	glm::mat4 getViewMatrix();
 	void ProcessKeyboard(Camera_Movement direction, float deltaTime);
-	void processMouseMovement(float xoffset, float yoffset);
+	void processMouseMovement(float xPos, float yPos);
 	
 private:
 	float pitch;
@@ -34,6 +34,10 @@ private:
 	float speed = -1.0f; //Set to negative value for fps like controls
 
 	void eulerToVectors(); //Updates internal vectors
+	float lastX = 0.0f;
+	float lastY = 0.0f;
+	float sensivity = .01f;
+	
 	
 };
 

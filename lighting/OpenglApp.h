@@ -15,9 +15,7 @@ public:
 	~OpenglApp();
 	unsigned int startRenderLoop();
 	Camera camera;
-	void hi() {
-		std::cout << "hi";
-	}
+	
 private:
 	void initialize_window();
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -36,8 +34,8 @@ private:
 
 	static void mouse_callback(GLFWwindow * window, double xpos, double ypos)
 	{
-		auto self = static_cast<OpenglApp*>(glfwGetWindowUserPointer(window));
-		self->hi();
+		auto self = static_cast<OpenglApp*>(glfwGetWindowUserPointer(window)); // Get pointer to current application object
+		self->camera.processMouseMovement(xpos, ypos);
 	}
 
 };
